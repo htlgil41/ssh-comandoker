@@ -6,6 +6,24 @@ import (
 	"ssh-comandoker/funcs"
 )
 
+var ips []string = []string{
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+	":22",
+}
+
 func main() {
 
 haveOption:
@@ -23,7 +41,10 @@ haveOption:
 		case 1:
 			{
 
-				funcs.CreateSessionSsh("")
+				for _, v := range ips {
+
+					go funcs.CreateSessionSsh(v)
+				}
 				break haveOption
 			}
 		default:
