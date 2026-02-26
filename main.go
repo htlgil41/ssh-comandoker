@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"ssh-comandoker/cmd"
+	"ssh-comandoker/funcs"
 )
 
 func main() {
@@ -22,7 +23,7 @@ haveOption:
 		case 1:
 			{
 
-				fmt.Println("Opcion numeor 01")
+				funcs.CreateSessionSsh("")
 				break haveOption
 			}
 		default:
