@@ -43,7 +43,7 @@ haveOption:
 
 				for _, v := range ips {
 
-					go funcs.CreateSessionSsh(v)
+					go funcs.RestartAllServicesVisor(v)
 				}
 				break haveOption
 			}

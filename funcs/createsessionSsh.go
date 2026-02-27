@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-func CreateSessionSsh(ip string) {
+func RestartAllServicesVisor(ip string) {
 
 	cliente, errCliente := ssgclient.CreateClientSsh(ip)
 	if errCliente != nil {
