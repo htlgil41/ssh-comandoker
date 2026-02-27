@@ -58,9 +58,6 @@ func RestartAllServicesVisor(ip string) {
 				if strings.Contains(text, "password for") {
 					in.Write([]byte("PASSWORD FOR EXECUTE SUDO COMAND\n"))
 					fmt.Println(text)
-				} else {
-
-					fmt.Println(string(bufferResponse[:n]))
 				}
 			}
 
