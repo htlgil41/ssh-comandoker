@@ -2,9 +2,7 @@ package funcs
 
 import (
 	"fmt"
-	"io"
 	"ssh-comandoker/config/ssgclient"
-	"strings"
 
 	"golang.org/x/crypto/ssh"
 )
@@ -48,26 +46,8 @@ func ReBuildAllServicesVisor(ip string) {
 		fmt.Println("Error al ejecutar el comando deseado")
 		return
 	}
-	go func() {
-		for {
-			bufferResponse := make([]byte, 1024)
-			n, err := out.Read(bufferResponse)
-			if n > 0 {
 
-				text := string(bufferResponse[:n])
-				if strings.Contains(text, "password for") {
-					in.Write([]byte("PASSWORD FOR EXECUTE SUDO COMAND\n"))
-					fmt.Println(text)
-				}
-			}
-
-			if err != nil && err == io.EOF {
-
-				fmt.Println("Se ha producido un erro inesperado al tratar de ejecutar el comando en ", ip)
-				break
-			}
-		}
-	}()
+	go ReadWriterInServerSsh(ip, in, out)
 
 	sessionSsh.Wait()
 	fmt.Println("Terminado para ", ip)
