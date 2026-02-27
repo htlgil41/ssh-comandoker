@@ -22,7 +22,7 @@ Para garantizar la fiabilidad del proceso, el sistema contaba con un motor de tr
 
 
 ### Notas sobre el Desarrollo
-Es importante notar que esta aplicación refleja la lógica y la solución que implementé en mi empresa, por lo que el código puede presentarse como una referencia técnica de la arquitectura de solución más que como un producto comercial acabado. (Un codigo mas complejo y estructurado esta 'Activo' y desarrollado en la empresa al cual realice el darrollo)
+Es importante notar que esta aplicación refleja la lógica y la solución que implementé en mi empresa, por lo que el código puede presentarse como una referencia técnica de la arquitectura de solución más que como un producto comercial acabado. (Un codigo mas complejo y estructurado esta 'Activo' y desarrollado en la empresa).
 
 **Consideración de Seguridad:**
 Actualmente, el código utiliza una autenticación "insegura" basada en usuario y contraseña a modo de ejemplo y facilidad de uso inicial. En un entorno de producción real, lo ideal sería evolucionar esta conexión hacia el uso de certificados o llaves SSH para garantizar un estándar de seguridad mucho más elevado.
