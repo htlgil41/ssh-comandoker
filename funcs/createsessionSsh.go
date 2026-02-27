@@ -2,7 +2,9 @@ package funcs
 
 import (
 	"fmt"
+	"io"
 	"ssh-comandoker/config/ssgclient"
+	"strings"
 
 	"golang.org/x/crypto/ssh"
 )
@@ -39,8 +41,36 @@ func CreateSessionSsh(ip string) {
 		return
 	}
 
-	sessionSsh.Start("sudo docker compose -p visor -f docker-compose.visor.yml restart")
-	go ReadWriteInServer(ip, in, out)
+	fmt.Println("Todo listo para ejcutar el comando")
+	erroExecute := sessionSsh.Start("sudo docker compose -p visor -f docker-compose.visor.yml restart")
+	if erroExecute != nil {
+
+		fmt.Println("Error al ejecutar el comando deseado")
+		return
+	}
+	go func() {
+		for {
+			bufferResponse := make([]byte, 1024)
+			n, err := out.Read(bufferResponse)
+			if n > 0 {
+
+				text := string(bufferResponse[:n])
+				if strings.Contains(text, "password for") {
+					in.Write([]byte("PASSWORD FOR EXECUTE SUDO COMAND\n"))
+					fmt.Println(text)
+				} else {
+
+					fmt.Println(string(bufferResponse[:n]))
+				}
+			}
+
+			if err != nil && err == io.EOF {
+
+				fmt.Println("Se ha producido un erro inesperado al tratar de ejecutar el comando en ", ip)
+				break
+			}
+		}
+	}()
 
 	sessionSsh.Wait()
 	fmt.Println("Terminado para ", ip)
