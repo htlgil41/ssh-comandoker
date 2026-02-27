@@ -26,21 +26,21 @@ func CreateSessionSsh(ip string) {
 	defer sessionSsh.Close()
 	sessionSsh.RequestPty("xterm", 40, 80, ssh.TerminalModes{})
 
-	_, errIn := sessionSsh.StdinPipe()
+	in, errIn := sessionSsh.StdinPipe()
 	if errIn != nil {
 
 		fmt.Println("Error al establcer el pipe en la entrada de datos")
 		return
 	}
-	_, errOut := sessionSsh.StdoutPipe()
+	out, errOut := sessionSsh.StdoutPipe()
 	if errOut != nil {
 
 		fmt.Println("Error al establcer el pipe en la salida de datos")
 		return
 	}
 
-	sessionSsh.Start("Comando")
-	go ReadWriteInServer()
+	sessionSsh.Start("sudo docker compose -p visor -f docker-compose.visor.yml restart")
+	go ReadWriteInServer(ip, in, out)
 
 	sessionSsh.Wait()
 	fmt.Println("Terminado para ", ip)
