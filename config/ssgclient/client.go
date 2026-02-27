@@ -13,7 +13,7 @@ var configClientSsh *ssh.ClientConfig = &ssh.ClientConfig{
 		ssh.Password("PASSWORD"),
 	},
 	HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-	Timeout:         time.Second * 2,
+	Timeout:         time.Second * 5,
 }
 
 func CreateClientSsh(ip string) (*ssh.Client, error) {
