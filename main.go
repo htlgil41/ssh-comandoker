@@ -43,6 +43,15 @@ haveOption:
 
 				for _, v := range ips {
 
+					go funcs.ReBuildAllServicesVisor(v)
+				}
+				break haveOption
+			}
+		case 2:
+			{
+
+				for _, v := range ips {
+
 					go funcs.RestartAllServicesVisor(v)
 				}
 				break haveOption
